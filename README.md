@@ -25,6 +25,8 @@ The Eliza Task is inspired by one of the first natural language processing (NLP)
    Once you’re done, create a pull request with your changes.
 
 ## Helpful Resources
+- **Streamlit API Refrence**
+- [Streamlit API Refrence](https://docs.streamlit.io/develop/api-reference)
 
 - **Markdown Cheat Sheets:**
   - [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
@@ -32,3 +34,4 @@ The Eliza Task is inspired by one of the first natural language processing (NLP)
 
 - **Regex Cheat Sheet & Online Helper:**  
   [Regex 101](https://regex101.com/) for testing and learning regular expressions.
+
