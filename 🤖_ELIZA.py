@@ -2,11 +2,10 @@ import re
 import streamlit as st
 from streamlit_chat import message
 
-asked_questions = set() #check if the question as already asked
+asked_questions = set()  # Check if the question has already been asked
 
 # Function to generate a response
 def generate_response(user_input, asked_questions):
-    # Define regex patterns and responses
     patterns = [
         (r"(.*)name(.*)", "How old are you?"),
         (r"(.*)old(.*)", "What are you most passionate about in your work?"),
@@ -113,16 +112,14 @@ def generate_response(user_input, asked_questions):
             # Check if the pattern is already in asked_questions
             if pattern not in asked_questions:
                 asked_questions.add(pattern)  # Mark the pattern as asked
-                # Format the response with captured groups
                 return response.format(*[group.strip() for group in match.groups()])
-    
-    # Fallback response if no new patterns are matched
     return "I see. Can you tell me more?"
 
 if 'past' not in st.session_state:
     st.session_state['past'] = []  # User messages
+
 if 'generated' not in st.session_state:
-    st.session_state['generated'] = ["Welcome to ELIDA!"]  # Default ELIDA message
+    st.session_state['generated'] = []  # Bot responses
 
 def on_input_change():
     user_input = st.session_state.user_input
@@ -131,21 +128,20 @@ def on_input_change():
     st.session_state.generated.append(bot_response)
     st.session_state.user_input = ""
 
-
 st.title("ELIDA")
 
+# Chat display
 chat_placeholder = st.empty()
 
 with chat_placeholder.container():
+    # Always display the welcome message as the first chat message
+    message("Welcome to ELIDA!", key="welcome_message")
+    
+    # Render user and bot messages
     for i in range(len(st.session_state['generated'])):
         message(st.session_state['past'][i], is_user=True, key=f"{i}_user") if i < len(st.session_state['past']) else None
         message(st.session_state['generated'][i], key=f"{i}")
 
-
-
 # User input field
-
 with st.container():
     st.text_input("User Input:", on_change=on_input_change, key="user_input")
-
-
