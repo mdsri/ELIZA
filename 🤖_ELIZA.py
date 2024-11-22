@@ -2,22 +2,10 @@ import re
 import streamlit as st
 from streamlit_chat import message
 
-def Interviewer_chat():
-    print("Interviewer: Hello! I'm Interviewer. introduce yourself please \n (type 'quit' to exit)")    #beging of the conversation
-    
-    asked_patterns = set()   #check if the question as already asked
+asked_questions = set() #check if the question as already asked
 
-    while True:
-        user_input = input("You: ")
-        
-        if user_input.lower() == "quit":        
-            print("Interviewer: Goodbye! Take care.")       #to quit the conversation
-            break
-        
-        response = generate_response(user_input, asked_patterns)
-        print(f"Interviewer: {response}")
-
-def generate_response(user_input, asked_patterns):
+# Function to generate a response
+def generate_response(user_input, asked_questions):
     # Define regex patterns and responses
     patterns = [
         (r"(.*)name(.*)", "How old are you?"),
@@ -122,33 +110,27 @@ def generate_response(user_input, asked_patterns):
     for pattern, response in patterns:
         match = re.match(pattern, user_input, re.IGNORECASE)
         if match:
-            # Check if the pattern is already in asked_patterns
-            if pattern not in asked_patterns:
-                asked_patterns.add(pattern)  # Mark the pattern as asked
+            # Check if the pattern is already in asked_questions
+            if pattern not in asked_questions:
+                asked_questions.add(pattern)  # Mark the pattern as asked
                 # Format the response with captured groups
                 return response.format(*[group.strip() for group in match.groups()])
     
     # Fallback response if no new patterns are matched
     return "I see. Can you tell me more?"
 
-# Start with ELIDA
-Interviewer_chat()
-
-# Function to generate a response
-def generate_response(user_input):
-    return f"Bot says: You wrote '{user_input}'"
-
 if 'past' not in st.session_state:
     st.session_state['past'] = []  # User messages
 if 'generated' not in st.session_state:
-    st.session_state['generated'] = []  # ELIDA responses
+    st.session_state['generated'] = ["Welcome to ELIDA!"]  # Default ELIDA message
 
 def on_input_change():
     user_input = st.session_state.user_input
     st.session_state.past.append(user_input)
-    bot_response = generate_response(user_input)
+    bot_response = generate_response(user_input, asked_questions)
     st.session_state.generated.append(bot_response)
     st.session_state.user_input = ""
+
 
 st.title("ELIDA")
 
@@ -156,8 +138,9 @@ chat_placeholder = st.empty()
 
 with chat_placeholder.container():
     for i in range(len(st.session_state['generated'])):
-        message(st.session_state['past'][i], is_user=True, key=f"{i}_user")  # User message
-        message(st.session_state['generated'][i], key=f"{i}")  # ELIDA response
+        message(st.session_state['past'][i], is_user=True, key=f"{i}_user") if i < len(st.session_state['past']) else None
+        message(st.session_state['generated'][i], key=f"{i}")
+
 
 
 # User input field
@@ -165,4 +148,4 @@ with chat_placeholder.container():
 with st.container():
     st.text_input("User Input:", on_change=on_input_change, key="user_input")
 
-#test
+
