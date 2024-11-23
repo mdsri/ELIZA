@@ -128,14 +128,14 @@ def on_input_change():
     st.session_state.generated.append(bot_response)
     st.session_state.user_input = ""
 
-st.title("ELIDA")
+st.title("phantomMean")
 
 # Chat display
 chat_placeholder = st.empty()
 
 with chat_placeholder.container():
     # Always display the welcome message as the first chat message
-    message("Welcome to ELIDA!", key="welcome_message")
+    message("Welcome to the AI developer interview!", key="welcome_message")
     
     # Render user and bot messages
     for i in range(len(st.session_state['generated'])):
