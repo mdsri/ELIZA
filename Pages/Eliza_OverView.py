@@ -53,15 +53,17 @@ discovering their skills and experiences through structured questions.
    # st.success("You are now ready to explore the world of PhantomMeet! 🚀")
 
 # شريط جانبي
-st.sidebar.header("Options")
-page = st.sidebar.radio("Choose a section:", ["Introduction to Eliza and PhantomMeet", "Chat Page ", "Team Members"])
-if page == "Introduction to Eliza and PhantomMeet":
-    st.sidebar.write("You are currently exploring Introduction to Eliza and PhantomMeet")
-elif page == "Chat Page":
-    st.sidebar.write("")
-else:
-    st.sidebar.write("Learn more about this project!")
+#st.sidebar.header("Options")
+#page = st.sidebar.radio("Choose a section:", ["Introduction to Eliza and PhantomMeet", "Chat Page ", "Team Members"])
+#if page == "Introduction to Eliza and PhantomMeet":
+ #   st.sidebar.write("You are currently exploring Introduction to Eliza and PhantomMeet")
+#elif page == "Chat Page":
+ #   st.sidebar.write("")
+#else:
+#    st.sidebar.write("Learn more about this project!")
 
 # نهاية الصفحة
 st.markdown("---")
 st.write("✨ **Thank you for exploring Our PhantomMeet!**")
+
+
