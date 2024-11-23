@@ -4,7 +4,7 @@ import streamlit as st
 team_members = [
     {
         "name": "Rawan Alghamdi",
-        "intro": "Computer Science graduate from KAU with a bachelor's degree, passionate about artificial intelligence and Data analysis.",
+        "intro": "Computer Science graduate from KAU with a bachelor's degree, passionate about AI and Data analysis.",
         "linkedin": "https://www.linkedin.com/in/rawan-alghamdi-460364222/"
     },
     {
