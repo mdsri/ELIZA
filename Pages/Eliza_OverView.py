@@ -16,9 +16,7 @@ st.subheader("1. Who is Eliza?")
 st.write("""
 One of the first **_Neuro-Linguistic Programming (NLP)_** programs was developed in 1964 by **_Joseph Weizenbaum_**, 
 a computer scientist at **_Massachusetts Institute of Technology (MIT)_**.  
-The program was designed for human-to-human text-based conversations, 
-and more models were selected from it based on the recommendation of a **_psychiatrist_** who was simulating 
-the taste of psychiatric wine during interactions with the patient.
+The program is designed to conduct conversations with humans in a way that makes you feel as if you are talking to a human being and not a machine, and it simulates the style of a psychiatrist.
 """)
 
 # ماذا تفعل إليزا؟
