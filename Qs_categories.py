@@ -1,26 +1,40 @@
 import re
 import time
 import random
+
 print("Phantom: Hello! I'm Phantom. Please introduce yourself by telling me your name.")
     
 asked_patterns = set()
 name = input("You: ").strip()
 time.sleep(random.uniform(3, 7))
 
-# Check if user doesn't want to share name
+# # Check if user doesn't want to share their name
+# if any(phrase in name.lower() for phrase in ["don't", "dont", "not", "won't", "wont", "prefer not", "rather not", "private", "personal", "no", "nope", "nah", "pass"]):
+#     print("Phantom: I understand if you prefer to remain anonymous. How old are you?")
+# elif name.isdigit():  # Check if the input is numeric
+#     print("Phantom: That's an unusual name! No problem though. How old are you?")
+# else:
+#     print("Phantom: It's nice to meet you! How old are you?")
+    
+    # Check if user doesn't want to share their name
 if any(phrase in name.lower() for phrase in ["don't", "dont", "not", "won't", "wont", "prefer not", "rather not", "private", "personal", "no", "nope", "nah", "pass"]):
     print("Phantom: I understand if you prefer to remain anonymous. How old are you?")
+elif any(char.isdigit() for char in name):  # Check if any number is in the input
+    print("Phantom: That's an unusual name! No problem though. How old are you?")
 else:
     print("Phantom: It's nice to meet you! How old are you?")
+
 
 age = input("You: ").strip()
 time.sleep(random.uniform(3, 7))
 
-# Check if user doesn't want to share age
+#if user doesn't want to share age
 if any(phrase in age.lower() for phrase in ["don't", "dont", "not", "won't", "wont", "prefer not", "rather not", "private", "personal", "no", "nope", "nah", "pass"]):
     print("Phantom: I understand if you prefer not to share your age. From which university did you graduate?")
-else:
-    print("Phantom: And where did you graduate from?")
+elif re.match(r".*(?:\d+|twenty|\byears\b).*", age): 
+     print(f"Phantom: From which university did you graduate?")
+else: # it prints a natural response if the user input a number as "five" or "thirty" or undefined
+    print("Phantom: Hmm, just to let you know, the position we're discussing is generally suited for individuals in their twenties. From which university did you graduate?")
 
 graduation = input("You: ").strip()
 time.sleep(random.uniform(3, 7))
@@ -29,7 +43,8 @@ time.sleep(random.uniform(3, 7))
 if any(phrase in graduation.lower() for phrase in ["don't", "dont", "not", "won't", "wont", "prefer not", "rather not", "private", "personal", "no", "nope", "nah", "pass"]):
     print("Phantom: That's perfectly fine. Let's move on. Phantom: Can you tell mehow proficient are you in Python, and what libraries do you use most often?")
 else:
-    print("Phantom: Can you tell mehow proficient are you in Python, and what libraries do you use most often?")
+    print("Phantom: Can you tell me how proficient are you in Python, and what libraries do you use most often?")
+    
 def interviewer_chat():
  
     
@@ -152,7 +167,6 @@ def interviewer_chat():
 # Categories of questions
 categories = {
     "Personal": [
-        (r"(.*)old(.*)", "What are you most passionate about in your work?"),
         (r"(.*)passion(.*)", "What are you most passionate about in your work?"),
         (r"(.*)challenge(.*)", "What is the biggest challenge you have overcome in your career?"),
         (r"(.*)motivation(.*)", "What motivates you to excel in your field?"),
